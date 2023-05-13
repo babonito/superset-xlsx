@@ -12,7 +12,7 @@ COPY ./${SUPERSET_VER}/superset-frontend /app/superset-frontend
 ######################################################################
 # Node stage to deal with static asset construction
 ######################################################################
-FROM node:14 AS superset-node
+FROM node:16 AS superset-node
 
 ARG NPM_VER=7
 RUN npm install -g npm@${NPM_VER}
@@ -42,7 +42,7 @@ RUN cd /app/superset-frontend \
 ######################################################################
 FROM superset-official AS superset-xlsx
 USER root
-RUN pip install --no-cache openpyxl==3.0.3
+RUN pip install --no-cache openpyxl==3.1.2
 COPY --from=superset-node /app/superset/static/assets /app/superset/static/assets
 USER superset
 
