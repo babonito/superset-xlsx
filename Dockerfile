@@ -41,12 +41,8 @@ RUN cd /app/superset-frontend \
 # Final image
 ######################################################################
 FROM superset-official AS superset-xlsx
-
 USER root
-
 RUN pip install --no-cache openpyxl==3.0.3
-
 COPY --from=superset-node /app/superset/static/assets /app/superset/static/assets
-
 USER superset
 
